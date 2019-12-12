@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<!--- META area --->
+	<meta charset="UTF-8">
+	<meta name="description" content="쉬운 듯 쉽지 않은 HTML" />
+	<!--
+		* 반응형 웹 개발하는 것을 보면 일단 기본적으로 모바일 화면을 베이스로 하는 경우가 다수이다.
+	-->
+
+	<!-- 영어 공부의 필요성을 느끼게 해주는 사이트 ;( (https://www.w3.org/TR/css-device-adapt-1) 사이트 들어가서 9번 항목 살펴보기. -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"><!--
+		사이트의 내용을 정리하자면(확실하지는 않지만), iOS의 Safari를 위한 태그로서 발전했다. 이 태그는 자동으로 CSS의 @viewport 속성으로 변환된다고 한다. 애초에 Apple 사가 만든 것으로 규범적이지 않지만, 한 눈에 viewport 설정을 볼 수 있다는 장점이 있다.
+	-->
+
+	<!-- 필요성을 모르겠는 meta 태그
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	-->
+	<!--- /META area --->
+	
+	<!-- TITLE -->
+	<title>Benigndeus | Home</title>
+
+	<!-- Google Web Font is Love♥ (https://fonts.google.com) -->
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400,700|Nanum+Gothic:400,700,800|Nanum+Myeongjo:400,700,800|Oswald:200,300,400,500,600,700|Raleway:200,300,400,700,800,900&display=swap&subset=korean" rel="stylesheet"><!--
+		font-family: 'Nanum Gothic', sans-serif;		// 제목 한글
+		font-family: 'Nanum Gothic Coding', monospace;	// 코딩 글꼴
+		font-family: 'Nanum Myeongjo', serif;			// 기본 한글
+		font-family: 'Oswald', sans-serif;				// 제목 영어
+		font-family: 'Raleway', sans-serif;				// 기본 영어
+	-->
+
+	<!-- Weather API (출처를 까먹었음. 어차피 다른 방식으로 개선할 예정이므로 그대로 둠.) -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+
+	<!-- default css & javascript -->
+	<link rel="stylesheet" href="./src/css/index.css">
+	<link rel="stylesheet" href="./src/css/main.css">
+	<script src="./src/js/index.js"></script>
+
+	<!-- jQuery -->
+	
+	<!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/PIE.js"></script>
+        <script>
+            $(function() {if (window.PIE) {$('.rounded').each(function() {PIE.attach(this);});}});
+        </script>
+        <style>
+            body {min-width: 1024px;}
+        </style>
+    <![endif]-->
+</head>
+<body>
+	<header>
+		<h1 id="main-title">
+			<a href="./index.html" target="_self">Benigndeus</a>
+		</h1>
+		<button id="mobile-menu-open">
+			<span class="blind">모바일 메뉴 열기</span>
+			<span></span><span></span><span></span>
+		</button>
+		<div id="mobile-menu-wrap">
+			<ul id="util-menu">
+				<li><a href="./index.html" target="_self">Home</a></li>
+				<li><a href="#">Login</a></li>
+				<li><a href="#">Sitemap</a></li>
+			</ul>
+			<nav id="gnb">
+				<p class="blind">메인 메뉴</p>
+				<ul>
+					<li id="menu-1">
+						<a href="#">STUDY</a>
+						<ul>
+							<li><a href="#">HTML</a></li>
+							<li><a href="#">Java</a></li>
+							<li><a href="#">Python</a></li>
+							<li><a href="#">Database</a></li>
+						</ul>
+					</li>
+					<li id="menu-2">
+						<a href="#">ESSAY</a>
+						<ul>
+							<li><a href="#">Copy</a></li>
+							<li><a href="#">Diary</a></li>
+						</ul>
+					</li>
+					<li id="menu-3">
+						<a href="#">GPS</a>
+						<ul>
+							<li><a href="#">학원 소개</a></li>
+							<li><a href="#">커리큘럼</a></li>
+							<li><a href="#">중등부</a></li>
+							<li><a href="#">고등부</a></li>
+						</ul>
+					</li>
+					<li id="menu-4">
+						<a href="#">Archive</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<button id="mobile-menu-close">
+			<span class="blind">모바일 메뉴 닫기</span>
+			<span></span><span></span><span></span>
+		</button>
+	</header>
+
+	<div id="container">
+		<section id="main-visual" class="rounded">
+			<h3 class="blind">달력 넣을 곳이지만 일단 예시대로</h3>
+			<ul class="main-visual-slide">
+				<li>
+					<div class="visual-item-wrap item1">
+						<h4 class="visual-title">아이템 1 제목</h4>
+						<p>
+							<span>아이템 1 내용</span>
+						</p>
+						<p class="detail-view"><a href="#">자세히 보기</a></p>
+					</div>
+				</li>
+				<li>
+					<div class="visual-item-wrap item2">
+						<h4 class="visual-title">아이템 2 제목</h4>
+						<p>
+							<span>아이템 2 내용</span>
+						</p>
+						<p class="detail-view"><a href="#">자세히 보기</a></p>
+					</div>
+				</li>
+				<li>
+					<div class="visual-item-wrap item3">
+						<h4 class="visual-title">아이템 3 제목</h4>
+						<p>
+							<span>아이템 3 내용</span>
+						</p>
+						<p class="detail-view"><a href="#">자세히 보기</a></p>
+					</div>
+				</li>
+			</ul>
+		</section>
+		<section id="notice-tab-wrap" class="rounded">
+			<h3 class="sec-tit-1">NOTICE &amp; NEWS</h3>
+			<h4 class="tab-btn-1"><a href="#" class="on">공지사항</a></h4>
+			<div class="tab-container-1">
+				<ul>
+					<li><a href="#">공지사항 관련 내용</a><span>YYYY.MM.DD</span></li>
+					<li><a href="#">공지사항 관련 내용</a><span>YYYY.MM.DD</span></li>
+				</ul>
+				<p class="icon-more"><a href="#">more</a></p>
+			</div>
+			<h4 class="tab-btn-2"><a href="#">새소식</a></h4>
+			<div class="tab-container-2">
+				<p class="no-write">등록된 내용이 없습니다.</p>
+			</div>
+		</section>
+		<section id="best-book-wrap">
+			<h3 class="sec-tit-1">BEST BOOK</h3>
+			<ul class="best-book-list grid">
+				<li class="grid-item">
+					<table id="weather">
+						<caption><strong>Weather</strong></caption>
+						<colgroup>
+							<col class="weather-col1">
+							<col class="weather-col2">
+						</colgroup>
+						<thead></thead>
+						<tbody>
+							<tr>
+								<th>City</th>
+								<td id="city"></td>
+							</tr>
+							<tr>
+								<th>Temperature</th>
+								<td id="temperature-celcius"></td>
+							</tr>
+							<tr>
+								<th>Humidity</th>
+								<td id="humidity"></td>
+							</tr>
+							<tr>
+								<th>Overall</th>
+								<td id="overall"></td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="todo">
+						TODO
+					</div>
+				</li>
+				<li class="grid-item">
+					<p><a href="#"><img src="./src/img/logo.PNG" alt="컨텐츠 사진"></a></p>
+				</li>
+				<li class="grid-item">
+					<p><a href="#"><img src="./src/img/logo.PNG" alt="컨텐츠 사진"></a></p>
+					<p><a href="#"><img src="./src/img/logo.PNG" alt="컨텐츠 사진"></a></p>
+				</li>
+				<li class="grid-item">
+					<p><a href="#"><img src="./src/img/logo.PNG" alt="컨텐츠 사진"></a></p>
+				</li>
+			</ul>
+		</section>
+	</div>
+
+	<div id="footer-wrap">
+		<footer>
+			<address>
+				<small>benigndeus@gmail.com</small>
+			</address>
+			<small>Copyright &copy; All rights reserved.</small>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,0 +1,482 @@
+@charset "UTF-8";
+
+/********************* D E F U A L T *********************/
+* { margin:0; padding:0; }
+.blind { display:none; }/* HTML 파일 상에서는 표시되지만, 이 속성에 의해 브라우저에 출력되지 않는다. 그렇다, 낭비다. */
+html { overflow-y:scroll; }
+
+/* Font */
+body {
+	/* Google Web Font
+		font-family: 'Nanum Gothic', sans-serif;		// 제목 한글
+		font-family: 'Nanum Gothic Coding', monospace;	// 코딩 글꼴
+		font-family: 'Nanum Myeongjo', serif;			// 기본 한글
+		font-family: 'Oswald', sans-serif;				// 제목 영어
+		font-family: 'Raleway', sans-serif;				// 기본 영어
+	*/
+	font-size: 12px;
+	font-family: 'Nanum Myeongjo', serif;
+}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	font-family: 'Oswald', 'Nanum Gothic', sans-serif;
+}
+
+/* Anchor */
+a {
+	color: inherit;
+	cursor: pointer;
+}
+a:hover, a.on {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Media */
+img {
+	vertical-align: middle;
+}
+img, video {
+	max-width: 100%;
+}
+
+/* List */
+ol, ul {
+	list-style: none;
+}
+
+/* Form */
+button, input[type="button"] {
+	cursor: pointer;
+}
+
+/********************** L A Y O U T **********************/
+body {
+	min-width: 320px;
+}
+header, #container, footer {
+	margin: 0 auto;
+	max-width: 1008px;
+}
+
+/* * * * * HEADER * * * * */
+header {
+	position: relative;
+	height: auto;
+}
+#main-title {
+	margin: 0;
+	padding-bottom: 10px;
+	background-color: green;
+	text-align: center;
+	color: ivory;
+}
+
+	/* * * Menu * * */
+	#mobile-menu-wrap {
+		position: fixed;
+		left: -1000px;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: black; /*메뉴 열었을 때 배경색*/
+		z-index: 100;
+		color: ivory;
+	}
+	#mobile-menu-scroll {
+		height: 100%;
+		overflow-y: auto;
+	}
+		/* Menu Open Button */
+		#mobile-menu-open {
+			display: block;
+			/* 메뉴 열기 버튼 위치 */
+			position: absolute;
+			right: 20px;
+			top: 4px;
+			/* 크기 */
+			width: 40px;
+			height: 40px;
+			background: none;
+			border: none;
+		}
+		#mobile-menu-open span:first-child ~ span{
+			/* 메뉴 열기 버튼 모양 만들기 */
+			height: 4px;
+			width: 30px;
+			border-radius: 2px;
+			position: absolute;
+			background-color: white;
+			top: 50%;
+			left: 50%;
+			margin-top: -2px;
+			margin-left: -15px;
+		}
+		#mobile-menu-open span:first-child + span{
+			margin-top: -13px;
+		}
+		#mobile-menu-open span:first-child + span + span{
+			margin-top: 10px;
+		}
+
+		/* Menu Close Button */
+		#mobile-menu-close {
+			display: block;
+			/* 메뉴 닫기 버튼 위치 */
+			position: absolute;
+			top: 4px;
+			right: 22px;
+			/* 메뉴 닫기 버튼 크기 */
+			width: 30px;
+			height: 30px;
+			background: black;
+			border: 1px solid ivory;
+		}
+		#mobile-menu-close span:first-child ~ span{
+			/* 메뉴 닫기 버튼 모양 만들기 */
+			width:26px;
+			position: absolute;
+			border-bottom: 1px solid ivory;
+			top: 50%;
+			left: 50%;
+			margin-top: -1px;
+			margin-left: -13px;
+			transform: rotate(-45deg);
+		}
+		#mobile-menu-close span:first-child + span{
+			transform: rotate(45deg);
+		}
+
+		/* Util Menu */
+		#util-menu {
+			position: static;
+			font-size: inherit;
+			margin: 0;
+		}
+		#util-menu li {
+			float: none;
+			padding: 0;
+			margin: 0;
+			background-color: darkolivegreen;
+		}
+
+		/* Global Navigation Bar */
+		#gnb {
+			position: static;
+		}
+		#gnb ul li {
+			float: none;
+		}
+		#gnb ul li a {
+			color: inherit;
+			font-size: inherit;
+			text-align: left;
+		}
+		#gnb > ul > li > a {
+			border-bottom: 1px solid black;
+			position: relative;
+		}
+		#gnb > ul > li > a.on {
+			background-color: #222;
+			border-bottom: 1px solid #222;
+		}
+		#gnb > ul > li > a:after {
+			/* gnb 하위 메뉴 화살표 */
+			content: "";
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			border-top: 1px solid #fff;
+			border-right: 1px solid #fff;
+			transform-origin: 100% 50%;
+			transform: rotate(135deg);
+			position: absolute;
+			right: 17px;
+			top: 16px;
+			margin-right: 7px;
+		}
+		#gnb > ul > li:last-child > a:after{
+			/* Archive는 하위 메뉴 없음 */
+			content: none;
+		}
+		#gnb > ul > li > a.on:after{
+			transform: rotate(-45deg);
+			margin-right: 0;
+		}
+		#gnb ul ul {
+			display: block;
+			position: static;
+			width: auto;
+			margin: 0;
+			border-radius: 0;
+			border: none;
+			background: none;
+			background-color: darkolivegreen;
+			display: none;
+		}
+		#gnb ul ul a {
+			border-bottom: 1px solid black;
+		}
+
+		/* Util Menu & GNB */
+		#util-menu a, #gnb > ul > li > a, #gnb ul ul a {
+			height: 40px;
+			line-height: 40px;
+			display: block;
+			padding:0 15px;
+			font-family: 'Nanum Gothic', sans-serif;
+		}
+		#util-menu a, #gnb > ul > li > a {
+			position: relative;
+			border-bottom: 1px solid white;
+			font-family: 'Oswald', sans-serif;
+		}
+
+/* * * * * C O N T A I N E R * * * * */
+#container {
+	padding: 10px 10px;
+}
+#main-visual, #side-tab-wrap {
+	float: none;
+	margin-bottom: 10px;
+	width: 100%;
+	border: 2px solid green;
+	border-radius: 7px;
+}
+
+	/* * * Main Visual * * */
+	#main-visual .visual-item-wrap {
+		/* position */
+		position: relative;
+		padding-left: 50px;
+		padding-right: 50px;
+		/* size */
+		min-height: 400px;
+	}
+	#main-visual .visual-item-wrap:after {
+		content: "";
+		width: 27.33017377567141%;/*173px*/
+		height: 276px;
+		position: absolute;
+		left: 11.848341232227488%; /*75px*/
+		top: 36px;
+		-webkit-background-size: 100% auto;
+		background-size: 100% auto;
+	}
+	#main-visual .detail-view a {
+		display: inline-block;
+		padding: 5px 10px;
+		border-radius: 3px;
+		background-color: black;
+		text-align: center;
+		vertical-align: middle;
+		color: ivory;
+	}
+	#main-visual .detail-view a:hover, #main-visual .detail-view a:focus {
+		background-color: brown;
+	}
+
+		/* * * bxslider * * */
+		.bx-wrapper {
+			margin-bottom: 40px;
+			background: none;
+			box-shadow: none;
+			border: none;
+		}
+		.bx-wrapper .bx-controls-direction a {
+			background: none;
+		}
+		.bx-prev:after, .bx-next:before {
+			position: absolute;
+			display: inline-block;
+			top: -10%;
+			font-size: 50px;
+			color: black;
+		}
+		.bx-prev:after {
+			content: "<";
+			left: -10px;
+			text-indent: 0;
+		}
+		.bx-next:before {
+			content: ">";
+			right: -10px;
+			text-indent: 0;
+		}
+
+	/* * * Side Tab * * */
+
+	/* * * Dev Area * * */
+	#dev-area {
+		clear: both;
+		overflow: hidden;
+	}
+	.grid-item {
+		float: left;
+		width: 49.5%;
+		min-height: 140px;
+		border: 1px solid green;
+		border-radius: 7px;
+	}
+	#sec-grid li:nth-child(2n) {
+		float: right;
+	}
+	/*
+		.grid li:nth-child(3n) {clear: both;}
+	*/
+
+/* * * * * F O O T E R * * * * */
+footer {
+	padding: 10px 0;
+	text-align: center;
+}
+address {
+	margin-bottom: 5px;
+}
+
+
+/************************** P C **************************/
+@media (min-width:801px) {
+	header, #container, footer {
+		max-width:1008px;
+		margin:0 auto;
+	}
+
+	/* * * * * HEADER * * * * */
+	header {
+		position: relative;
+		margin-bottom: 40px;
+		height: 150px;
+	}
+	#main-title {
+		
+		background: none;
+		padding:20px 0 0;
+		/* font */
+		font-size: 400%;
+		color: black;
+	}
+	#main-title a {
+		position: relative;
+		z-index: 2;
+	}
+
+	/* * * * * MENU * * * * */
+	#mobile-menu-wrap {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: none;
+		z-index: 1;
+	}
+		/* Menu Open & Close Button */
+		#mobile-menu-open, #mobile-menu-close {
+			display: none;
+		}
+		/* Util Menu */
+		#util-menu {
+			display: block;
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-size: 12px;
+		}
+		#util-menu li {
+			float: left;
+			padding-left: 7px;
+			margin-left: 0;
+			background: none;
+		}
+		#util-menu li:first-child {
+			margin-left: 0;
+			padding: 0;
+		}
+		#util-menu a {
+			color: black;
+			display: block;
+			height: 38px;
+			line-height: 38px;
+			border: 0;
+		}
+
+		/* Global Navigation Bar */
+		#gnb {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+		}
+		#gnb > ul > li {
+			width: 25%;
+			float: left;
+			position: relative;
+		}
+		#gnb > ul > li > a {
+			display: block;
+			height: 45px;
+			background-color: white;
+			text-align: center;
+			line-height: 45px;
+			color: black;
+			font-size: 18px;
+		}
+		#gnb > ul > li > a.on {
+			background-color: white;
+			color: black;
+		}
+		#gnb > ul > li > a:hover, #gnb > ul > li > a:focus {
+			border-bottom: none;
+			background-color: white;
+			color: black;
+		}
+		#gnb ul ul {
+			display: none;
+			position: absolute;
+			left: 50%;
+			top: 45px;
+			width: 180px;
+			margin-left: -90px;
+			background-color: white;
+			border: 1px solid brown;
+			border-top: none;
+			border-radius: 0 0 7px 7px;
+			font-size: 13px;
+		}
+		#gnb ul ul a {
+			display: block;
+			height: 40px;
+			border: none;
+			line-height: 40px;
+			text-align: center;
+			color: black;
+		}
+
+	/* * * * * CONTAINER * * * * */
+	#container {
+		padding: 0 10px;
+	}
+
+		/* * * Main Visual * * */
+		#main-visual {
+			position: relative;
+			float: left;
+			z-index: 0;
+			margin-bottom: 40px;
+			width: 64.5%;
+			min-height: 300px;
+			border: 1px solid brown;
+			border-radius: 7px;
+		}
+
+		/* * * Side Tab * * */
+		#side-tab-wrap {
+			position: relative;
+			float: right;
+			margin-bottom: 40px;
+			padding: 22px 13px 0;
+			width: 34.5%;
+			min-height: 300px;
+			border: 1px solid brown;
+			border-radius: 7px;
+		}
+}
