@@ -50,6 +50,14 @@ $(function() {
 			console.log(json.location);
 		})
 	}
+
+	$(document).ready(function() {
+		
+	    $.getJSON("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c", function(data) {
+			console.log(data.location.lat);
+
+	    });
+	});
 	
 	function getWeather(lat, lon) {
 		$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
