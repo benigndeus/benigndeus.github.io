@@ -20,11 +20,14 @@
 	<title>Benigndeus | Home</title>
 
 	<!-- jQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<!-- jquery-cookie 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>-->
 		<!-- bxslider -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+		<!-- isotope -->
+		<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 
 	<!-- Google Web Font (https://fonts.google.com) -->
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding:400,700|Nanum+Gothic:400,700,800|Nanum+Myeongjo:400,700,800|Oswald:200,300,400,500,600,700|Raleway:200,300,400,700,800,900&display=swap&subset=korean" rel="stylesheet"><!--
@@ -37,6 +40,10 @@
 
 	<!-- Weather API (출처를 까먹었음. 어차피 다른 방식으로 개선할 예정이므로 그대로 둠.) -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Module Source -->
+	<script src="./src/js/widget.js"></script>
+	<link rel="stylesheet" href="./src/css/widget.css">
 
 	<!-- Default css & javascript -->
 	<link rel="stylesheet" href="./src/css/index.css">
@@ -155,68 +162,72 @@
 					<p>
 						<span>item2</span>
 					</p>
-					<p class="detail-view">자세히 보기</p>
+					<p class="detail-view"><a href="#">자세히 보기</a></p>
 				</li>
 				<li id="blank" class="visual-item-wrap item3">
 					<h4>Blank</h4>
 					<p>
 						<span>item3</span>
 					</p>
-					<p class="detail-view">자세히 보기</p>
+					<p class="detail-view"><a href="#">자세히 보기</a></p>
 				</li>
 			</ul>
 		</section>
 		<section id="side-tab-wrap">
 			<h3 class="sec-title">Article &amp; News</h3>
-			<h4 id="tab-btn-1"><a href="#">Article</a></h4>
-			<div id="tab-container-1">
+			<h4 class="tab btn-1"><a class="on" href="#">Article</a></h4>
+			<h4 class="tab btn-2"><a href="#">Issue</a></h4>
+			<div class="tab-container tc1">
 				<ul>
 					<li><a href="#">article 1</a><span>YYYY.MM.DD</span></li>
 					<li><a href="#">article 2</a><span>YYYY.MM.DD</span></li>
 				</ul>
 				<p class="icon-more"><a href="#">more</a></p>
 			</div>
-			<h4 id="tab-btn-2"><a href="#">Issue</a></h4>
-			<div id="tab-container-2">
+			<div class="tab-container tc2">
 				<ul>
 					<li id="issue-1"><a href="#">네이버 순위</a></li>
 				</ul>
 			</div>
 		</section>
 		<section id="dev-area">
-			<h3 class="sec-title">Dev Area</h3>
+			<h3 class="blind">Dev Area</h3>
 			<ul id="sec-grid" class="grid">
 				<li class="grid-item">
-					<table id="weather">
-						<caption><strong>Weather</strong></caption>
-						<colgroup>
-							<col class="weather-col1">
-							<col class="weather-col2">
-						</colgroup>
-						<thead></thead>
-						<tbody>
-							<tr>
-								<th>City</th>
-								<td id="city"></td>
-							</tr>
-							<tr>
-								<th>Temperature</th>
-								<td id="temperature-celcius"></td>
-							</tr>
-							<tr>
-								<th>Humidity</th>
-								<td id="humidity"></td>
-							</tr>
-							<tr>
-								<th>Overall</th>
-								<td id="overall"></td>
-							</tr>
-						</tbody>
-					</table>
+					<div class="grid-inner">
+						<table id="weather">
+							<caption><strong>Weather</strong></caption>
+							<colgroup>
+								<col class="weather-col1">
+								<col class="weather-col2">
+							</colgroup>
+							<thead></thead>
+							<tbody>
+								<tr>
+									<th>City</th>
+									<td id="city"></td>
+								</tr>
+								<tr>
+									<th>Temperature</th>
+									<td id="temperature-celcius"></td>
+								</tr>
+								<tr>
+									<th>Humidity</th>
+									<td id="humidity"></td>
+								</tr>
+								<tr>
+									<th>Overall</th>
+									<td id="overall"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</li>
 				<li class="grid-item">
-					<div id="todo">
-						할 일 체크리스트
+					<div class="grid-inner">
+						<div id="todo">
+							할 일 체크리스트
+						</div>
 					</div>
 				</li>
 			</ul>

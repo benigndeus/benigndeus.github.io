@@ -1,0 +1,14 @@
+/* * * * * WIDGET * * * * */
+/* * * Weather * * */
+#weather {
+	width: 100%;
+	height: auto;
+	font-family: 'Raleway', sans-serif;
+}
+#weather caption {
+	font-size: 150%;
+	font-family: 'Oswald', sans-serif;
+}
+#weather col {
+	width: 50%;
+}
