@@ -47,7 +47,7 @@ $(function() {
 	function getGoogleGeolaction() {
 		$.getJSON("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c"
 		, function(json) {
-			console.log(json);
+			console.log(json.location);
 		})
 	}
 	
