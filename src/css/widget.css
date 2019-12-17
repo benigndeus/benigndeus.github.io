@@ -6,9 +6,20 @@
 	font-family: 'Raleway', sans-serif;
 }
 #weather caption {
-	font-size: 150%;
+	font-size: 140%;
 	font-family: 'Oswald', sans-serif;
 }
 #weather col {
 	width: 50%;
+}
+#weather tr {
+	height: 30px;
+}
+#weather th {
+	text-align: center;
+}
+#weather td p {
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
 }
