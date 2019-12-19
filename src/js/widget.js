@@ -7,6 +7,7 @@
 
 	- ip-api
 		이건 뭐 그냥 호출만 하면 됨. 지금은 api key 필요 없는데 사실 지금 제대로 사용하고 있는지 알 수 없음. 기본적으로 ip를 통해 사용자의 대략적인 위치정보(lat, lon)를 알 수 있음. 도시의 이름까지 알아낼 수 있는데, 받아오는 내용을 확인하고 테스트해 봐야 알 수 있음.
+		** 현재 Mixed Context 현상으로 인해 http 로드는 사용할 수 없을 듯 하여 대신할 API를 찾고 있다.
 		{ // example data
 			"query": "24.48.0.1",
 			"status": "success",
@@ -25,64 +26,38 @@
 		}
 */
 $(function() {
-	var lat, lon;
 	var apiKey = "56a89a0896774bfd861d459497cc1af4";
-	
-	if(navigator.geolocation) {
+	var infoWindow = new google.maps.InfoWindow;
+
+	// Try HTML5 geolocation.
+	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(
 			function(position) {
-				lat = position.coords.latitude;
-				lon = position.coords.longitude;
-				printCityFromIP();
-				getWeather(lat, lon);
-			}, function(error) {
-				// 에러 처리라는 건 알겠지만 필요성을 모르겠음
-				console.error(error);
-				// 여기에 ip 읽고 날씨 출력하는 함수 호출 가능? 일부로 오류를 낼 수도 없고 참...
-			}, {
-				// 필요성을 모르겠음
-				enableHighAccuracy: false,
-				maximumAge: 0,
-				timeout: Infinity
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				console.log(pos.lat);
+				getWeather(pos); // 날씨 추적
+				infoWindow.setPosition(pos);
+				infoWindow.setContent('Location found.');
+		}, function() {
+			handleLocationError(true, infoWindow);
 		});
 	} else {
-		// GPS 정보를 사용할 수 없는 경우 아이피 추적을 통해 대략적인 위치를 계산해주는 API(ip-api) 사용
-		getLocationFromIP();
+		// Browser doesn't support Geolocation
+		handleLocationError(false, infoWindow);
 	}
 
-	function getLocationFromIP() {
-		$.getJSON("https://ip-api.com/json", function(data) {
-			lat = data.lat;
-			lon = data.lon;
-			getWeather(lat, lon);
-		});
-	}
-
-	function printCityFromIP() {
-		$.getJSON("https://ip-api.com/json", function(data) {
-			/*console.log(
-				"ip-api data" +
-				"\nquery       : " + data.query +
-				"\nstatus      : " + data.status +
-				"\ncountry     : " + data.country +
-				"\ncountryCode : " + data.countryCode +
-				"\nregion      : " + data.region +
-				"\nregionName  : " + data.regionName +
-				"\ncity        : " + data.city +
-				"\nzip         : " + data.zip +
-				"\nlat         : " + data.lat +
-				"\nlon         : " + data.lon +
-				"\ntimezone    : " + data.timezone +
-				"\nisp         : " + data.isp +
-				"\norg         : " + data.org +
-				"\nas          : " + data.as
-			);*/
-			$("#w-city").html(data.city)
-		});
+	function handleLocationError(browserHasGeolocation, infoWindow) {
+		infoWindow.setPosition(pos);
+		infoWindow.setContent(browserHasGeolocation ?
+			'Error: The Geolocation service failed.' :
+			'Error: Your browser doesn\'t support geolocation.');
 	}
 	
-	function getWeather(lat, lon) { // 날씨 정보 읽어오는 부분
-		$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
+	function getWeather(pos) { // 날씨 정보 읽어오는 부분
+		$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + pos.lat + "&lon=" + pos.lng + "&appid=" + apiKey
 		,function(json) {
 			//console.log(lat + " " + lon);
 			//console.log(json);
