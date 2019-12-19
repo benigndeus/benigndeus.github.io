@@ -51,7 +51,7 @@ $(function() {
 	}
 
 	function getLocationFromIP() {
-		$.getJSON("http://ip-api.com/json", function(data) {
+		$.getJSON("https://ip-api.com/json", function(data) {
 			lat = data.lat;
 			lon = data.lon;
 			getWeather(lat, lon);
@@ -59,7 +59,7 @@ $(function() {
 	}
 
 	function printCityFromIP() {
-		$.getJSON("http://ip-api.com/json", function(data) {
+		$.getJSON("https://ip-api.com/json", function(data) {
 			/*console.log(
 				"ip-api data" +
 				"\nquery       : " + data.query +
@@ -82,7 +82,7 @@ $(function() {
 	}
 	
 	function getWeather(lat, lon) { // 날씨 정보 읽어오는 부분
-		$.getJSON("http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
+		$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey
 		,function(json) {
 			//console.log(lat + " " + lon);
 			//console.log(json);
