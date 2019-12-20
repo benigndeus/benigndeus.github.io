@@ -15,7 +15,7 @@ $(function() {
     function initMap(lat, lng) {
         // 전혀 필요없는 map이지만 도시 정보를 읽어오기 위해 쓴다... 일단...
         var map = new google.maps.Map(document.getElementById('map'),
-        { zoom: 8, center: {lat: lat, lng: lng}});
+        { zoom: 8, center: {lat: parseFloat(lat), lng: parseFloat(lng)}});
         var geocoder = new google.maps.Geocoder;
         geocodeLatLng(geocoder, map);
     }
