@@ -19,7 +19,7 @@
 	<!-- TITLE -->
 	<title>Benigndeus | Home</title>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c&callback=initMap"
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c"
 	async defer></script>
 
 	<!-- jQuery -->
@@ -225,22 +225,20 @@
 				<li class="grid-item">
 					<div class="grid-inner">
 						<div id="map"> <!--????-->
-							할 일 체크리스트
 						</div>
 						<script>
+							initMap();
 							function initMap() {
 								var map = new google.maps.Map(document.getElementById('map'),
 								{ zoom: 8, center: {lat: 40.731, lng: -73.997}});
 							
 								var geocoder = new google.maps.Geocoder;
 								var infowindow = new google.maps.InfoWindow;
-								document.getElementById('submit').addEventListener('click', function() {
-									geocodeLatLng(geocoder, map, infowindow);
-								});
+								geocodeLatLng(geocoder, map, infowindow);
 							}
 							
 							function geocodeLatLng(geocoder, map, infowindow) {
-								var input = document.getElementById('latlng').value;
+								var input = "40.731,-73.997";
 								var latlngStr = input.split(',', 2);
 								var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
 								geocoder.geocode({'location': latlng}, function(results, status) {
