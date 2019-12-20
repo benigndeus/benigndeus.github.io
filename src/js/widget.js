@@ -8,60 +8,35 @@
 	- ip-api
 		이건 뭐 그냥 호출만 하면 됨. 지금은 api key 필요 없는데 사실 지금 제대로 사용하고 있는지 알 수 없음. 기본적으로 ip를 통해 사용자의 대략적인 위치정보(lat, lon)를 알 수 있음. 도시의 이름까지 알아낼 수 있는데, 받아오는 내용을 확인하고 테스트해 봐야 알 수 있음.
 		** 현재 Mixed Context 현상으로 인해 http 로드는 사용할 수 없을 듯 하여 대신할 API를 찾고 있다.
-		{ // example data
-			"query": "24.48.0.1",
-			"status": "success",
-			"country": "Canada",
-			"countryCode": "CA",
-			"region": "QC",
-			"regionName": "Quebec",
-			"city": "Montreal",
-			"zip": "H1S",
-			"lat": 45.5808,
-			"lon": -73.5825,
-			"timezone": "America/Toronto",
-			"isp": "Le Groupe Videotron Ltee",
-			"org": "Videotron Ltee",
-			"as": "AS5769 Videotron Telecom Ltee"
-		}
 */
 $(function() {
-	var apiKey = "56a89a0896774bfd861d459497cc1af4";
-	var infoWindow = new google.maps.InfoWindow;
+	var ipinfoKey = "17f45312c140cf";
+	$.getJSON("https://ipinfo.io/json?token=" + ipinfoKey
+	,function(json) {
+		console.log(json);
+		$("#w-city").html(json.city);
+		var locArray = json.loc.split(",");
+		var lat = locArray[0];
+		var lng = locArray[1];
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				lat = position.coords.latitude;
+				lng = position.coords.longitude;
+				getWeather(lat, lng); // 날씨 추적
+			}, function() {
+				handleLocationError(true, infoWindow);
+			});
+		} else {
+			console.log("위치정보서비스 사용 불가 -> IP주소를 통해 대략적인 위치의 날씨를 출력");
+			getWeather(lat, lng);
+		}
+	});
 
-	// Try HTML5 geolocation.
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(
-			function(position) {
-				var pos = {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
-				};
-				console.log(pos.lat);
-				getWeather(pos); // 날씨 추적
-				infoWindow.setPosition(pos);
-				infoWindow.setContent('Location found.');
-		}, function() {
-			handleLocationError(true, infoWindow);
-		});
-	} else {
-		// Browser doesn't support Geolocation
-		handleLocationError(false, infoWindow);
-	}
-
-	function handleLocationError(browserHasGeolocation, infoWindow) {
-		infoWindow.setPosition(pos);
-		infoWindow.setContent(browserHasGeolocation ?
-			'Error: The Geolocation service failed.' :
-			'Error: Your browser doesn\'t support geolocation.');
-	}
-	
-	function getWeather(pos) { // 날씨 정보 읽어오는 부분
-		$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + pos.lat + "&lon=" + pos.lng + "&appid=" + apiKey
+	function getWeather(lat, lng) { // 날씨 정보 읽어오는 부분
+		var weatherKey = "56a89a0896774bfd861d459497cc1af4";
+		$.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lng + "&appid=" + weatherKey
 		,function(json) {
-			//console.log(lat + " " + lon);
-			//console.log(json);
-
+			// console.log(json);
 			/*절대 온도 주어지므로 받은 값에서 273을 뺌*/
 			$("#w-temperature-celcius").html("기온 " + Math.round(json.main.temp - 273) + " C&deg;");
 			$("#w-humidity").html("습도 " + json.main.humidity + " %");

@@ -46,11 +46,48 @@
 		font-family: 'Raleway', sans-serif;				// 기본 영어
 	-->
 
-	<!-- Module Source -->
+	<!-- Module Source 
 	<script src="./src/js/widget.js"></script>
-	<link rel="stylesheet" href="./src/css/widget.css">
-		<!-- Google Maps Javascript API -->
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c"></script>
+	<link rel="stylesheet" href="./src/css/widget.css">-->
+	<script>
+	$.getJSON('https://json.geoiplookup.io/api?callback=?', function(data) {
+		console.log(JSON.stringify(data, null, 2));
+	});
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c&callback=initMap"
+	async defer></script>
+	<script>
+function initMap() {
+	var map = new google.maps.Map(document.getElementById('map'),
+	{ zoom: 8, center: {lat: 40.731, lng: -73.997}});
+
+	var geocoder = new google.maps.Geocoder;
+	var infowindow = new google.maps.InfoWindow;
+	document.getElementById('submit').addEventListener('click', function() {
+		geocodeLatLng(geocoder, map, infowindow);
+	});
+}
+
+function geocodeLatLng(geocoder, map, infowindow) {
+	var input = document.getElementById('latlng').value;
+	var latlngStr = input.split(',', 2);
+	var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+	geocoder.geocode({'location': latlng}, function(results, status) {
+		if (status === 'OK') {
+			if (results[0]) {
+				map.setZoom(11);
+				var marker = new google.maps.Marker({ position: latlng, map: map });
+				infowindow.setContent(results[0].formatted_address);
+				infowindow.open(map, marker);
+			} else {
+				window.alert('No results found');
+			}
+		} else {
+			window.alert('Geocoder failed due to: ' + status);
+		}
+	});
+}
+	</script>
 
 	<!-- Default css & javascript -->
 	<link rel="stylesheet" href="./src/css/index.css">
@@ -218,7 +255,7 @@
 				</li>
 				<li class="grid-item">
 					<div class="grid-inner">
-						<div id="todo">
+						<div id="map"> <!--????-->
 							할 일 체크리스트
 						</div>
 					</div>
