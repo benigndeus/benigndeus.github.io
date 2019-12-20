@@ -19,6 +19,7 @@
 	<!-- TITLE -->
 	<title>Benigndeus | Home</title>
 
+	<!-- Google Maps API -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c"
 	async defer></script>
 
@@ -52,11 +53,6 @@
 	<!-- Module Source 
 	<script src="./src/js/widget.js"></script>
 	<link rel="stylesheet" href="./src/css/widget.css">-->
-	<script>
-	$.getJSON('https://json.geoiplookup.io/api?callback=?', function(data) {
-		console.log(JSON.stringify(data, null, 2));
-	});
-	</script>
 
 	<!-- Default css & javascript -->
 	<link rel="stylesheet" href="./src/css/index.css">
@@ -227,6 +223,8 @@
 						<div id="map"> <!--????-->
 						</div>
 						<script>
+							/* Check Result on console -> console.log(results[0]); */
+							/*
 							initMap();
 							function initMap() {
 								var map = new google.maps.Map(document.getElementById('map'),
@@ -244,10 +242,7 @@
 								geocoder.geocode({'location': latlng}, function(results, status) {
 									if (status === 'OK') {
 										if (results[0]) {
-											map.setZoom(11);
-											var marker = new google.maps.Marker({ position: latlng, map: map });
-											infowindow.setContent(results[0].formatted_address);
-											infowindow.open(map, marker);
+											console.log(results[0]); //*******
 										} else {
 											window.alert('No results found');
 										}
@@ -256,6 +251,7 @@
 									}
 								});
 							}
+							*/
 						</script>
 					</div>
 				</li>
