@@ -3,7 +3,7 @@ $(function() {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
-            initMap(lat, lng);
+            geocodeLatLng(lat, lng);
         }, function() {
             handleLocationError(true, infoWindow);
         });
@@ -12,23 +12,16 @@ $(function() {
         getPosFromIP();
     }
 
-    function initMap(lat, lng) {
-        // 전혀 필요없는 map이지만 도시 정보를 읽어오기 위해 쓴다... 일단...
-        var map = new google.maps.Map(document.getElementById('map'),
-        { zoom: 8, center: {lat: parseFloat(lat), lng: parseFloat(lng)}});
-        var geocoder = new google.maps.Geocoder;
-        geocodeLatLng(geocoder, map);
-    }
-
-    function geocodeLatLng(geocoder, map) {
-        var input = map.center.lat + "," + map.center.lng;
-        console.log(map);
-        var latlngStr = input.split(',', 2);
-        var latlng = { lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-        geocoder.geocode({'location': latlng}, function(results, status) {
+    function geocodeLatLng(lat, lng) {
+        var geocoder = new google.maps.Geocoder();
+        console.log(geocoder);
+        var latlng = new google.maps.LatLng(lat, lng);
+        console.log(latlng);
+        geocoder.geocode( { 'location' : latlng}, function(results, status) {
+            console.log('status: ' + status + ', results: ' + results);
             if (status === 'OK') {
                 if (results[0]) {
-                    console.log(results[0]); //*******
+                    console.log(results[0].formatted_address); //*******
                 } else {
                     window.alert('No results found');
                 }
