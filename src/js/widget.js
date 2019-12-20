@@ -21,7 +21,7 @@ $(function() {
             if (status === 'OK') {
                 if (results[0]) {
                     console.log("Geocoder 위치 확인 완료");
-                    $("#w-city").html(json.city);
+                    $("#w-city").html(results[0].formatted_address);
                 } else {
                     console.log("Geocoder 위치 확인 실패");
                 }
