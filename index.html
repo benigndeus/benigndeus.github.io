@@ -28,9 +28,9 @@
     }
 
     function initClient() {
-      var API_KEY = 'AIzaSyD5KVdWL4y-555A7ULfhiHGMHPjDFhAMGo';  // TODO: Update placeholder with desired API key.
+      var API_KEY = 'AIzaSyArG1UrTWcTp6tRbPZiXvp57jdwksLen3c';  // TODO: Update placeholder with desired API key.
 
-      var CLIENT_ID = 'GSA';  // TODO: Update placeholder with desired client ID.
+      var CLIENT_ID = 'benigndeus';  // TODO: Update placeholder with desired client ID.
 
       // TODO: Authorize using one of the following scopes:
       //   'https://www.googleapis.com/auth/drive'
@@ -47,7 +47,7 @@
         gapi.auth2.getAuthInstance().isSignedIn.listen(updateSignInStatus);
         updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
       });
-    }
+    }x
 
     function handleClientLoad() {
       gapi.load('client:auth2', initClient);
