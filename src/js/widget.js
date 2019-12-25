@@ -3,7 +3,7 @@ $(function() {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
-            geocodeLatLng(lat, lng);
+			geocodeLatLng(lat, lng);
             getWeather(lat, lng);
         }, function() {
             handleLocationError(true, infoWindow);
@@ -20,13 +20,19 @@ $(function() {
         ,function (results, status) {
             if (status === 'OK') {
                 if (results[0]) {
-                    console.log("Geocoder 위치 확인 완료");
-                    $("#w-city").html(results[0].formatted_address);
+					console.log("Geocoder 위치 확인 완료");
+					var address = results[0].formatted_address.split(" ");
+					console.log(
+						"result[0] : " + result[0] +
+						"\nformatted_address : " + results[0].formatted_address +
+						"\naddress : " + address
+					);
+                    $("#w-city").html(address[1] + " " + address[2] + " " + address[3]);
                 } else {
                     console.log("Geocoder 위치 확인 실패");
                 }
             } else {
-                console.log("Geocoder 상태 : " + status);
+                console.log("Geocoder 실행 실패\n상태 : " + status);
             }
         });
     }
@@ -35,11 +41,11 @@ $(function() {
         var ipinfoKey = "17f45312c140cf";
         $.getJSON("https://ipinfo.io/json?token=" + ipinfoKey
         ,function(json) {
-            // console.log(json);
+            //console.log(json);
             var locArray = json.loc.split(",");
             var lat = locArray[0];
-            var lng = locArray[1];
-            geocodeLatLng(lat, lng);
+			var lng = locArray[1];
+			$("#w-city").html(json.city);
             getWeather(lat, lng);
         });
     }
