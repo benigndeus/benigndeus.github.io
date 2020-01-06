@@ -1,1 +1,7 @@
+#vscode
 .vscode/
+
+# java
+.settings/
+bin/
+lib/

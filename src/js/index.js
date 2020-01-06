@@ -44,7 +44,8 @@
 
 		// PC에서 gnb에 마우스를 올렸을 때 하위 메뉴 보이기
 		$(document).on("mouseover focus", ".pc #gnb>ul>li>a", gnbPlay);
-		$(document).on("click", ".mobile #gnb>ul>li:last-child>a", gnbPlay);
+		// Mobile에서 gnb 메뉴 클릭했을 때 하위 메뉴 보이기
+		$(document).on("click", ".mobile #gnb>ul>li>a", gnbPlay);
 		function gnbPlay() {
 			var $ts = $(this);
 			if($html.hasClass("mobile")) {
