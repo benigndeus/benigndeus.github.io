@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head></head><body>
+<div id="notice">
+	이 기능을 사용하기 위해서는 Google에서 권한을 승인해야 합니다.<br>
+	<a href="https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive&include_granted_scopes=true&state=jiho&redirect_uri=http%3A%2F%2F127.0.0.1%3A5500%2Fbenigndeus.github.io%2Fredirect.html&response_type=token&client_id=717175644700-pn2de82o80lnrqjd4u0v2ukj05f47nar.apps.googleusercontent.com">권한 받기</a>
+</div>
+<div id="welcome" style="display: none;"></div>
+
+<script>
+	var CLIENT_ID = '717175644700-pn2de82o80lnrqjd4u0v2ukj05f47nar.apps.googleusercontent.com';
+	var REDIRECT_URI = 'http://127.0.0.1:5500/benigndeus.github.io/redirect.html';
+	var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+	var globalResult;
+	var goodocid = "1S1_0KpY1qmWzxGNDnNzwT3w5p-Cfn8mo0A2GjXpO_60";
+
+	// Access Token을 response 해온 url에서 따낸다.
+	var atr = location.href.match('access_token=([^&]*)');
+	console.log('access token regular expression : ', atr);
+	if (atr) {
+		var access_token = atr[1];
+		console.log('access token : ', access_token);
+		fetch(
+			"https://www.googleapis.com/drive/v3/files/?access_token=" + access_token
+		)
+		.then(function (raw) {
+			return raw.json();
+		})
+		.then(function (result) {
+			if (result.error) {
+			} else {
+				console.log(result);
+				globalResult = result.files;
+				document.querySelector('#notice').style.display = 'none';
+				document.querySelector('#welcome').style.display = 'block';
+				/* document.querySelector('#welcome').innerHTML = globalResult; */
+				console.log(globalResult);
+				readDoc(globalResult);
+			}
+		})
+	}
+
+	function readDoc(array) {
+		for (var i=0; i < 100; i++) {
+			
+			if (array[i].id == goodocid) {
+				fetch(
+					"https://docs.googleapis.com/v1/documents/" + goodocid + "?access_token=" + access_token
+				)
+				.then(function (raw) {
+					return raw.json();
+				})
+				.then(function (result) {
+					if (result.error) {
+					} else {
+						console.log(result);
+						document.querySelector('#welcome').innerHTML = result.body.content[1].paragraph.elements[0].textRun.content;
+					}
+				})
+			}
+		}
+	}
+</script>
+</body>
+</html>
